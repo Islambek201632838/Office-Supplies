@@ -1,0 +1,153 @@
+<html>
+<head>
+<style>
+	.title {
+		font-weight: bold;
+		font-size: 24px;
+		text-align: center;
+	}
+	table {
+		margin-left: auto;
+		margin-right: auto;
+	}
+	td {
+		width:150px;
+		text-align: center;
+	}
+	
+	h1 {
+		text-align: center;
+	}
+</style>
+<script>
+var penpics = ["pen1.jpg", "pen2.jpg", "pen3.jpg"];
+var notepics = ["notebook1.jpg", "notebook2.jpg"];
+var calcpics = ["calculator1.jpg", "calculator2.jpg", "calculator3.jpg", "calculator4.jpg"];
+var clippics = ["clips1.jpg", "clips2.jpg", "clips3.jpg", "clips4.jpg", "clips5.jpg"];
+
+var penprices = [15, 30, 100];
+var noteprices = [25, 40];
+var calcprices = [130, 90, 100, 200];
+var clipprices = [10, 15, 5, 20, 30];
+var img_now = 0;
+function changePensImage() {
+	if(img_now < penpics.length) {
+		document.getElementById('img1').src = penpics[img_now];
+		document.getElementById("penprice").innerHTML = '$'+penprices[img_now];
+		img_now++;
+	} else {
+		img_now=0;
+	}
+}
+function changeNotesImage() {
+	if(img_now < notepics.length) {
+		document.getElementById('img2').src = notepics[img_now];
+		document.getElementById("noteprice").innerHTML = '$'+noteprices[img_now];
+		img_now++;
+	} else {
+		img_now=0;
+	}
+}
+function changeCalcsImage() {
+	if(img_now < calcpics.length) {
+		document.getElementById('img3').src = calcpics[img_now];
+		document.getElementById("calcprice").innerHTML = '$'+calcprices[img_now];
+		img_now++;
+	} else {
+		img_now=0;
+	}
+}
+function changeClipsImage() {
+	if(img_now < clippics.length) {
+		document.getElementById('img4').src = clippics[img_now];
+		document.getElementById("clipsprice").innerHTML = '$'+clipprices[img_now];
+		img_now++;
+	} else {
+		img_now=0;
+	}
+}
+function addToCart() {
+	var x = document.getElementById("selectPen").value;
+	var noteOpt = document.getElementById("selectNote").value;
+	var calOpt = document.getElementById("calcNote").value;
+	var clipOpt = document.getElementById("clipNote").value;
+	var penPr = document.getElementById("penprice").innerText;
+	var notePr = document.getElementById("noteprice").innerText;
+	var calcPr = document.getElementById("calcprice").innerText;
+	var clipPr = document.getElementById("clipsprice").innerText;
+	console.log('parseInt', typeof parseInt(penPr.replace(/\$/g, '')));
+	document.getElementById("invoice").innerHTML = 'Pen X '+x  + ' = ' + '$' + x * parseInt(penPr.replace(/\$/g, ''));
+	document.getElementById("invoice1").innerHTML = 'Notebook X '+noteOpt  + ' = ' + '$' + noteOpt * parseInt(notePr.replace(/\$/g, ''));
+	document.getElementById("invoice2").innerHTML = 'Calculator X '+calOpt  + ' = ' + '$' + calOpt * parseInt(calcPr.replace(/\$/g, ''));
+	document.getElementById("invoice3").innerHTML = 'Clips X '+clipOpt  + ' = ' + '$' + clipOpt * parseInt(clipPr.replace(/\$/g, ''));
+	document.getElementById("amount").innerHTML = 'Total: ' + '$' + (x * parseInt(penPr.replace(/\$/g, '')) + noteOpt * parseInt(notePr.replace(/\$/g, '')) + calOpt * parseInt(calcPr.replace(/\$/g, '')) + clipOpt * parseInt(clipPr.replace(/\$/g, '')));
+}
+</script>
+</head>
+<body>
+	<h1>Office Supplies</h1>
+	<br/>
+	<table>
+		<tr>
+			<td><img id="img1" width=100 height=100 src="pen1.jpg" onclick="changePensImage()" /></td>
+			<td class="title">Pen</td>
+			<td><select id="selectPen">
+					<option></option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+				</select>
+			</td>
+			<td id="penprice">$15</td>
+		</tr>
+		<tr>
+			<td><img id="img2" width=100 height=100 src="notebook1.jpg" onclick="changeNotesImage()" /></td>
+			<td class="title">Notebook</td>
+			<td><select id='selectNote'>
+					<option></option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+				</select>
+			</td>
+			<td id="noteprice">$25</td>
+		</tr>
+		<tr>
+			<td><img id="img3" width=100 height=100 src="calculator1.jpg" onclick="changeCalcsImage()" /></td>
+			<td class="title">Calculator</td>
+			<td><select id='calcNote'>
+					<option></option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+				</select>
+			</td>
+			<td id="calcprice">$130</td>
+		</tr>
+		<tr>
+			<td><img id="img4" width=100 height=100 src="clips1.jpg" onclick="changeClipsImage()" /></td>
+			<td class="title">Clips</td>
+			<td><select id='clipNote'>
+					<option></option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+				</select>
+			</td>
+			<td id="clipsprice">$10</td>
+		</tr>
+	</table>
+	<br/>
+	<center><button onclick="addToCart()">Add to Cart</button></center>
+	<br/>
+	<hr/>
+	<div id="invoice" style="text-align:center">
+	</div>
+	<div id="invoice1" style="text-align:center"></div>
+	<div id="invoice2" style="text-align:center">
+	</div>
+	<div id="invoice3" style="text-align:center">
+	</div>
+	<div id='amount' style="text-align:center"></div>
+</body>
+</html>
